@@ -2,6 +2,7 @@ import axios from 'axios'
 import type { AuthLogin, AuthResponse } from '@/types/auth.type'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.1.103:8000'
+const TOKEN_KEY = 'auth_token'
 
 const api = axios.create({
   baseURL: `${API_URL}/api`,
@@ -26,15 +27,15 @@ class AuthService {
   }
 
   getStoredToken(): string | null {
-    return localStorage.getItem('auth_token')
+    return sessionStorage.getItem(TOKEN_KEY)
   }
 
   storeToken(token: string): void {
-    localStorage.setItem('auth_token', token)
+    sessionStorage.setItem(TOKEN_KEY, token)
   }
 
   removeToken(): void {
-    localStorage.removeItem('auth_token')
+    sessionStorage.removeItem(TOKEN_KEY)
   }
 }
 

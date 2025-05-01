@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
+import { authService } from '@/services/auth.service'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -38,7 +39,7 @@ const router = createRouter({
 
 // Guardia de navegación
 router.beforeEach((to, from, next) => {
-  const authToken = localStorage.getItem('auth_token')
+  const authToken = authService.getStoredToken()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && !authToken) {
