@@ -52,5 +52,5 @@ class AuthService {
     sessionStorage.removeItem(USER_DATA_KEY)
   }
 }
-
 export const authService = new AuthService()
+

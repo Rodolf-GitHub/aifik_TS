@@ -26,6 +26,15 @@ const routes: RouteRecordRaw[] = [
     }
   },
   {
+    path: '/usuarios',
+    name: 'usuarios',
+    component: () => import('@/views/UsersView.vue'),
+    meta: {
+      requiresAuth: true,
+      layout: 'default'
+    }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/views/NotFoundView.vue')
