@@ -11,7 +11,6 @@ const userData = ref<UserCreate>({
   username: '',
   email: '',
   password: '',
-  aaff_id: null
 })
 
 const closeModal = () => {
@@ -21,7 +20,6 @@ const closeModal = () => {
     username: '',
     email: '',
     password: '',
-    aaff_id: null
   }
 }
 

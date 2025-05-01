@@ -2,7 +2,6 @@ export interface UserCreate {
   username: string
   email: string
   password: string
-  aaff_id?: string | null
 }
 
 export interface UserResponse {
