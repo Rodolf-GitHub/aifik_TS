@@ -12,34 +12,44 @@ export const useAuthStore = defineStore('auth', {
     async login(credentials: AuthLogin) {
       try {
         const userData = await authService.login(credentials)
-        this.user = userData
-        this.isAuthenticated = true
-
-        // Almacenar token y configurar headers
-        authService.storeToken(userData.access_token)
-        authService.setAuthToken(userData.access_token)
-
+        this.setUserData(userData)
         return userData
       } catch (error) {
-        this.user = null
-        this.isAuthenticated = false
+        this.clearUserData()
         throw error
       }
     },
 
-    logout() {
+    setUserData(userData: AuthResponse) {
+      this.user = userData
+      this.isAuthenticated = true
+      // Almacenar token y datos del usuario
+      authService.storeToken(userData.access_token)
+      authService.storeUserData(userData)
+      authService.setAuthToken(userData.access_token)
+    },
+
+    clearUserData() {
       this.user = null
       this.isAuthenticated = false
       authService.removeToken()
+      authService.removeUserData()
       authService.removeAuthToken()
     },
 
-    initializeAuth() {
+    logout() {
+      this.clearUserData()
+    },
+
+    async initializeAuth() {
       const token = authService.getStoredToken()
-      if (token) {
+      const userData = authService.getStoredUserData()
+
+      if (token && userData) {
         authService.setAuthToken(token)
-        this.isAuthenticated = true
-        // Aquí podrías hacer una petición para obtener los datos del usuario si es necesario
+        this.setUserData(userData)
+      } else {
+        this.clearUserData()
       }
     },
   },
