@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colores principales actualizados */
+  --color-primary: #4c2882;
+  --color-primary-light: #b0a6d5;
+  --color-primary-dark: #7f00ff;
+  --color-secondary: #0a2635;
+  --color-accent: #fe1493;
+  --color-light: #e5e5e5;
+  --color-white: #ffffff;
+
+  /* Gradientes actualizados */
+  --gradient-primary: linear-gradient(to bottom right, #4c2882, #7f00ff);
+
+  /* Colores de texto */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+
+  /* Colores de fondo */
+  --color-background: #ffffff;
+  --color-background-overlay: rgba(176, 166, 213, 0.1); /* b0a6d5 con opacidad */
+}
+
+@layer base {
+  body {
+    @apply text-[#0a2635] bg-gray-50;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply block w-full px-4 py-3.5 
+           border border-gray-200 
+           rounded-2xl
+           bg-white/70 
+           backdrop-blur-sm
+           shadow-sm
+           focus:outline-none 
+           focus:ring-2 
+           focus:ring-[#4c2882]/30
+           focus:border-[#4c2882]
+           focus:bg-white
+           hover:border-[#b0a6d5]
+           transition-all duration-200;
+  }
+
+  input::placeholder {
+    @apply text-gray-400 italic;
+  }
+
+  select {
+    @apply appearance-none bg-no-repeat bg-right pr-10;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234c2882'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 1.5rem;
+  }
+
+  label {
+    @apply block text-sm font-medium text-[#4c2882] mb-2 ml-1;
+  }
+
+  button {
+    @apply transition-colors duration-200;
+  }
+
+  button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-[#4c2882] text-white rounded-xl hover:bg-[#7f00ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4c2882];
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-[#0a2635] text-white rounded-xl hover:bg-[#0a2635]/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a2635];
+  }
+
+  .btn-light {
+    @apply px-4 py-2 bg-[#b0a6d5] text-[#4c2882] rounded-xl hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4c2882];
+  }
+}
+
+/* Clases de utilidad */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+/* Estilos específicos para modales */
+.modal-content {
+  @apply bg-gradient-to-br from-[#b0a6d5]/10 to-[#4c2882]/5 p-8 rounded-3xl shadow-lg backdrop-blur-sm;
+}
+
+.modal-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.modal-field {
+  @apply relative mb-4 group;
+}
+
+/* Nuevos estilos para inputs dentro de modales */
+.modal-field input,
+.modal-field select,
+.modal-field textarea {
+  @apply pl-4 pr-10;
+}
+
+/* Efecto de label flotante */
+.modal-field label {
+  @apply transition-all duration-200 transform;
+}
+
+.modal-field input:focus + label,
+.modal-field select:focus + label,
+.modal-field textarea:focus + label {
+  @apply text-[#4c2882] font-semibold;
+}
+
+/* Iconos decorativos para inputs */
+.modal-field::after {
+  @apply absolute right-4 top-1/2 transform -translate-y-1/2 text-[#4c2882]/30 transition-all duration-200;
+}
+
+.modal-field:focus-within::after {
+  @apply text-[#4c2882];
+}
